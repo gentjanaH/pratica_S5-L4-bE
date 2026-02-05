@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type")
+@DiscriminatorColumn(name="dtype")
 public abstract class Items {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

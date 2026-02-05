@@ -14,14 +14,14 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-
+@NoArgsConstructor
 @DiscriminatorValue("PIZZA")
 public class Pizza extends Items {
 
-    
-    ArrayList<Toppings> toppings;
+    @ManyToMany(mappedBy = "pizzas")
+    private List<Toppings> toppings=new ArrayList<>();
 
-    public Pizza(String name, ArrayList<Toppings> toppings, int calories, double price) {
+    public Pizza(String name, List<Toppings> toppings, int calories, double price) {
 
         super(name, calories, price);
         Toppings tomato = new Toppings("Tomato", 50, 0.00);

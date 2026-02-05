@@ -11,32 +11,36 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Slf4j
 public class Runner implements CommandLineRunner {
 
-private final ItemsRepository itemsRepository;
+//private final ItemsRepository itemsRepository;
 
-	@Autowired
-	public Runner(ItemsRepository itemsRepository) {
-		this.itemsRepository = itemsRepository;
-	}
+//	@Autowired
+//	public Runner(ItemsRepository itemsRepository) {
+//		this.itemsRepository = itemsRepository;
+//	}
+//
+private final ItemsService itemsService;
 
-//private final ItemsService itemsService;
-//
-//
-//public Runner(ItemsService itemsService){
-//    this.itemsService=itemsService;
-//}
+
+public Runner(ItemsService itemsService){
+    this.itemsService=itemsService;
+}
 
 
     @Override
     public void run(String... args) throws Exception {
-        ArrayList<Toppings> toppings = new ArrayList<>();
+        List<Toppings> toppings = new ArrayList<>();
         Pizza pizzaMargherita=new Pizza("Margherita", toppings, 1104, 4.99 );
+        //creo nuovi toppings
+        Toppings prosciutto=new Toppings("prosciutto cotto", 150, 1.50);
+        Toppings prosciuttoCrudo=new Toppings("prosciutto crudo", 120, 2.50);
 
-        itemsRepository.save(pizzaMargherita);
+        itemsService.saveItems(pizzaMargherita);
 
     }
 }
