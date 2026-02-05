@@ -13,26 +13,43 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 @DiscriminatorValue("PIZZA")
 public class Pizza extends Items {
 
     @ManyToMany(mappedBy = "pizzas")
-    private List<Toppings> toppings=new ArrayList<>();
+    private List<Toppings> toppings = new ArrayList<>();
 
-    public Pizza(String name, List<Toppings> toppings, int calories, double price) {
+    private static final int baseCalorie = 1104;
+    private static final double basePrezzo = 4.99;
 
-        super(name, calories, price);
+    public Pizza(String name, List<Toppings> toppings) {
+
+        super(name, 0, 0);
         Toppings tomato = new Toppings("Tomato", 50, 0.00);
         Toppings cheese = new Toppings("Cheese", 92, 0.69);
         this.toppings = new ArrayList<>();
         this.toppings.add(tomato);
         this.toppings.add(cheese);
-
         this.toppings.addAll(toppings);
 
+    }
 
+    public int calcolaCalorie() {
+        int totaleCalorie = baseCalorie;
+        for (Toppings t : this.toppings) {
+            totaleCalorie += t.getCalories();
+        }
+        return totaleCalorie;
+    }
+
+    public double calcolaPrezzoPizza() {
+        double totalePrezzo = basePrezzo;
+        for (Toppings t : this.toppings) {
+            totalePrezzo += t.getPrice();
+        }
+        return totalePrezzo;
     }
 
     public String getToppingsList() {
@@ -45,9 +62,17 @@ public class Pizza extends Items {
     public void printInfo() {
         System.out.println(getName() + " - " +
                 " (" + getToppingsList() + ")  " +
-                " - " + getCalories() + " kcal - € " +
-                getPrice());
+                " - " + calcolaCalorie() + " kcal - € " +
+                calcolaPrezzoPizza());
 
 
+    }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "nome: " + getName() +
+//                "toppings=" + toppings +
+                '}';
     }
 }

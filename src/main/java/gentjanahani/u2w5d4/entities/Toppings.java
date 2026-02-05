@@ -16,20 +16,28 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 @DiscriminatorValue("TOPPING")
-public class Toppings extends Items{
+public class Toppings extends Items {
     @ManyToMany
-    private List<Pizza> pizzas=new ArrayList<>();
+    private List<Pizza> pizzas = new ArrayList<>();
 
     public Toppings(String name, int calories, double price) {
         super(name, calories, price);
     }
 
-    public void printInfo(){
+    public void printInfo() {
         System.out.println(getName() + " - " +
-                getCalories() +" kcal - € " +
+                getCalories() + " kcal - € " +
                 getPrice());
-    };
+    }
+
+    @Override
+    public String toString() {
+        return "Toppings{" +
+                "nome= " + getName() +
+//                "pizzas=" + pizzas +
+                '}';
+    }
 }
