@@ -84,7 +84,15 @@ public class Runner implements CommandLineRunner {
 //        itemsService.saveItems(tonnoCipolla);
         try {
 //            itemsService.findByIdAndDelete(1);
-            itemsService.filterByNameStartWith("P").forEach(System.out::println);
+
+//            itemsService.filterByNameStartWith("P").forEach(System.out::println);
+//            itemsService.filterByPrice(6.00).forEach(System.out::println);
+//            itemsService.findAndDeleteByPrice(0.0);
+//            Toppings toppingFromDB = itemsService.findToppingByName("mozzarella");
+//
+            List<Items> elementiDalDB = itemsService.filterByNameStartWith("PROSCIUTTO");
+            System.out.println("ELEMENTI DAL DB PER NOME  " + elementiDalDB);
+          
         } catch (NotFoundException ex) {
             log.error(ex.getMessage());
         }

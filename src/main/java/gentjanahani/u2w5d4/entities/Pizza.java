@@ -33,7 +33,8 @@ public class Pizza extends Items {
         this.toppings.add(tomato);
         this.toppings.add(cheese);
         this.toppings.addAll(toppings);
-
+        this.setCalories(calcolaCalorie());
+        this.setPrice(calcolaPrezzoPizza());
     }
 
     public int calcolaCalorie() {
@@ -50,6 +51,13 @@ public class Pizza extends Items {
             totalePrezzo += t.getPrice();
         }
         return totalePrezzo;
+    }
+
+    public void addToppings(Toppings topping) {
+        this.toppings.add(topping);
+
+        this.setCalories(calcolaCalorie());
+        this.setPrice(calcolaPrezzoPizza());
     }
 
     public String getToppingsList() {
@@ -72,6 +80,8 @@ public class Pizza extends Items {
     public String toString() {
         return "Pizza{" +
                 "nome: " + getName() +
+                " prezzo: " + getPrice() +
+
 //                "toppings=" + toppings +
                 '}';
     }

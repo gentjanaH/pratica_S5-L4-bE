@@ -12,7 +12,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+
 @NoArgsConstructor
 @DiscriminatorValue("DRINK")
 public class Drinks extends Items {
@@ -20,9 +20,19 @@ public class Drinks extends Items {
         super(name, calories, price);
     }
 
-    public  void printInfo(){
+    public void printInfo() {
         System.out.println(getName() + " - " +
-                getCalories() +" kcal - € " +
+                getCalories() + " kcal - € " +
                 getPrice());
-    };
+    }
+
+    ;
+
+    @Override
+    public String toString() {
+        return "Drinks{" +
+                "nome: " + getName() +
+                "prezzo: " + getPrice() +
+                "}";
+    }
 }

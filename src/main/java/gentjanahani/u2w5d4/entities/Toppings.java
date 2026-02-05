@@ -27,6 +27,7 @@ public class Toppings extends Items {
         super(name, calories, price);
     }
 
+
     public void printInfo() {
         System.out.println(getName() + " - " +
                 getCalories() + " kcal - € " +
@@ -36,7 +37,8 @@ public class Toppings extends Items {
     @Override
     public String toString() {
         return "Toppings{" +
-                "nome= " + getName() +
+                "nome: " + getName() +
+                " prezzo: " + getPrice() +
 //                "pizzas=" + pizzas +
                 '}';
     }

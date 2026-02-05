@@ -24,10 +24,10 @@ public class ItemsService {
 
     public void saveItems(Items newItems) {
 
-
         this.itemsRepository.save(newItems);
         log.info("L'elemento {} è stato salvato correttamente.", newItems.getName());
     }
+
 
     public Items findById(long idItems) {
         return itemsRepository.findById(idItems).orElseThrow(() -> new NotFoundException(idItems));
@@ -39,7 +39,34 @@ public class ItemsService {
         log.info("L'elemento {} è stato eliminato correttamente", itemsFounded.getName());
     }
 
+
     public List<Items> filterByNameStartWith(String partialName) {
         return itemsRepository.findByNameStartingWithIgnoreCase(partialName);
+    }
+
+    public List<Items> filterByPrice(double price) {
+        return itemsRepository.filterByPrice(price);
+    }
+
+    public void findAndDeleteByPrice(double price) {
+        List<Items> itemsFounded = this.filterByPrice(price);
+        itemsFounded.forEach(items -> {
+            itemsRepository.delete(items);
+            log.info("L'elemento {} è stato eliminato correttamente", items.getName());
+        });
+
+
+    }
+
+    public Toppings findToppingByName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Il nome del topping non può essere vuoto.");
+        }
+        Toppings topping = itemsRepository.findToppingByName(name);
+
+        if (topping == null) {
+            System.out.println("Elemento non trovato");
+        }
+        return topping;
     }
 }
